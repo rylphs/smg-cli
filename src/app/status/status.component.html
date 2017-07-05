@@ -1,1 +1,6 @@
-<div *ngIf="display" [@enterAnimation]>{{msg}}</div>
+<div id="status" *ngIf="display" [@enterAnimation]>
+    <div id="loading" style="background-image: url('assets/loading-16.svg')">
+    </div>
+    
+    <span>{{msg}}</span>
+</div>

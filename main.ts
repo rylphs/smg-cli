@@ -5,7 +5,7 @@ import {Events} from './src/app/config/events';
 
 let appConfig = {
   appPath:  app.getAppPath(),
-  concurrency: process.env.UV_THREADPOOL_SIZE || 4
+  concurrency: 2
 }
 
 

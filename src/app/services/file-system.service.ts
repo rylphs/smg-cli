@@ -79,7 +79,7 @@ export class FileSystemService {
              completeCallback();
         } catch (e) {
             fileCreateCallback = fileCreateCallback.bind({}, folder, dst);
-            this.sharp(src).resize(null, 300).toFile(dst).then(function () {
+            this.sharp(src).resize(null, AppConfig.thumbsSize).toFile(dst).then(function () {
                 fileCreateCallback()
                 completeCallback();
             });

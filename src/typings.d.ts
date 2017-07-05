@@ -9,3 +9,9 @@ interface Window {
   process: any;
   require: any;
 }
+
+// declare var appConfig:AppConfig;
+// interface AppConfig {
+//   thumbs: string,
+//   concurrency: number
+// }

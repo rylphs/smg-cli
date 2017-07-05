@@ -5,3 +5,12 @@ html, body {
 
   height: 100%;
 }
+
+.ui-tree{
+    width: auto !important;
+}
+
+
+.ui-tree.ui-widget-content{
+    background-color: transparent !important;
+}

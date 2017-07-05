@@ -1,8 +1,25 @@
-import { app, BrowserWindow, screen } from 'electron';
+import { app, BrowserWindow, screen, Tray, Menu, dialog, ipcMain } from 'electron';
 import * as path from 'path';
+import {Events} from './src/app/config/events';
+
+
+let appConfig = {
+  appPath:  app.getAppPath(),
+  concurrency: process.env.UV_THREADPOOL_SIZE || 4
+}
 
 
 let win, serve;
+
+function selectFolder(){
+  dialog.showOpenDialog({
+    properties: [ 'openDirectory']
+  }, (folders:string[]) =>{
+    if(!folders || folders.length == 0) return;
+    win.webContents.send(Events.FOLDER_SELECTED, folders[0]);
+  });
+}
+
 const args = process.argv.slice(1);
 serve = args.some(val => val === "--serve");
 
@@ -12,6 +29,24 @@ if (serve) {
 }
 
 function createWindow() {
+  global['AppConfig'] = appConfig;
+
+  const menuTemplate = [
+    {label:"File", submenu: [
+      {label:"Select Folder", click: selectFolder, accelerator: 'CommandOrControl+o'}, 
+      {label:"Preferences"}]
+    },
+    {label:"Help", submenu: [{label: "About", role: "about"}]}
+  ];
+
+  
+
+
+
+  const menu = Menu.buildFromTemplate(menuTemplate)
+  Menu.setApplicationMenu(menu)
+
+  const appIcon = new Tray(app.getAppPath() + '/assets/smg-cli.png')
 
   let electronScreen = screen;
   let size = electronScreen.getPrimaryDisplay().workAreaSize;
@@ -21,7 +56,8 @@ function createWindow() {
     x: 0,
     y: 0,
     width: size.width,
-    height: size.height
+    height: size.height,
+    icon: app.getAppPath() + '/assets/smg-cli.png'
   });
 
   // and load the index.html of the app.

@@ -1,0 +1,10 @@
+<div id="main-container">
+    <div id="main-content">
+      <div id="dir-nav">
+        <folder-tree [folder]="currentFolder" (onSelect)="mostrarFotos($event)"></folder-tree>
+      </div>
+      <div id="content"><image-list [images]="imagesDisplayed"></image-list></div>
+    </div>
+
+    <status></status>
+</div>

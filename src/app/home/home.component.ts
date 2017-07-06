@@ -1,5 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, EventEmitter, ViewChildren, QueryList} from '@angular/core';
 import {FileSystemService} from '../services/file-system.service'
+import {MenuService, Menu} from '../services/menu.service';
+import {remote} from 'electron';
 
 @Component({
   selector: 'app-home',
@@ -12,14 +14,24 @@ export class HomeComponent implements OnInit {
   selectedFolder:string;
   notifyme:EventEmitter<string> = new EventEmitter();
   
-  constructor(private fs: FileSystemService, private dRef:ChangeDetectorRef) { 
-    fs.onSelectFolder((folder)=> {
-      this.currentFolder = folder;
-      setTimeout(()=> dRef.detectChanges(),0);
+  constructor(private fs: FileSystemService, private dRef:ChangeDetectorRef, private menuService:MenuService) {
+    Menu.File.SelectFolder(this.showFolderSelectDialog.bind(this));
+  }
+
+  private onFolderSelected(folder){
+    this.currentFolder = folder;
+    setTimeout(()=> this.dRef.detectChanges(),0);
+  }
+
+  private showFolderSelectDialog(){
+    remote.dialog.showOpenDialog({ properties: [ 'openDirectory']},
+      (folders:string[]) =>{
+        if(!folders || folders.length == 0) return;
+        this.onFolderSelected.call(this, folders[0]);
     });
   }
 
-  mostrarFotos(folder:string){
+  showPhotos(folder:string){
     var thisContext = this;
     this.selectedFolder = folder;
     this.imagesDisplayed = this.fs.getThumbnails(folder);
@@ -31,6 +43,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.menuService.showMenu();
   }
 
 }

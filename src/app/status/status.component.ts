@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import {remote} from 'electron';
 import {
   trigger,
   state,
@@ -7,6 +8,7 @@ import {
   transition
 } from '@angular/animations';
 import {StatusService} from './status.service';
+import {MenuService, Menu} from '../services/menu.service';
 
 @Component({
   selector: 'status',
@@ -25,7 +27,7 @@ export class StatusComponent implements OnInit {
   private msg:string = "";
   display:boolean = false;
 
-  constructor(private status:StatusService, private dRef:ChangeDetectorRef) { 
+  constructor(private status:StatusService, private dRef:ChangeDetectorRef, private menuService: MenuService) { 
     status.addListener((status:{status:string, complete:boolean})=>{
       this.msg = status.status;
       this.display = ! status.complete;

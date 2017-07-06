@@ -4,7 +4,6 @@ import { remote as Electron, ipcRenderer} from 'electron';
 import {AppConfig} from '../config/config';
 import {Messages} from '../config/messages';
 import {Events} from '../config/events';
-import { ConfigService } from '../services/config.service';
 
 @Injectable()
 export class FileSystemService {
@@ -17,7 +16,7 @@ export class FileSystemService {
     md5: any;
     onFolderChanged : EventEmitter<string> = new EventEmitter();
 
-    private mkdirtree(base){
+    mkdirtree(base){
         if(!base || base === '') return;
         var path = this.path.parse(base);
          

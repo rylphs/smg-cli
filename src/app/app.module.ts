@@ -6,14 +6,13 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import {FileSystemService, WindowService, MenuService} from './services/services';
+import { StatusService } from './status/status.service';
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import {ImageListComponent} from './image-list/image-list.component';
 import {StatusComponent} from './status/status.component';
-import {FileSystemService} from './services/file-system.service';
-import {WindowService} from './services/window.service';
-import { StatusService } from './status/status.service';
-import { MenuService } from './services/menu.service';
 import { FolderTreeComponent } from './folder-tree/folder-tree.component';
 
 import { AppRoutingModule } from './app-routing.module';

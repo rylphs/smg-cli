@@ -1,0 +1,25 @@
+@import 'src/styles.scss';
+
+#content {
+    width: 100%;
+    height: 100%;
+    background-color: $bg;
+}
+
+.centered {
+    position: relative;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#next{
+    margin-left: 20px;
+}
+
+#prev{
+    margin-right: 20px;
+}

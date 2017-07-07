@@ -11,3 +11,9 @@ export var AppConfig  = {
   concurrency: remote.getGlobal("AppConfig").concurrency,
   dbLocation: getPath(".files/db/db.json"),
 }
+
+export var Routes = {
+  IMAGE_DETAIL: {
+    path: "image"
+  }
+}

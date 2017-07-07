@@ -5,3 +5,11 @@
     background: #EFEFEF;
     margin: 5px;
 }
+
+.selected{
+    -webkit-box-shadow: -4px 4px 5px 2px rgba(0,0,0,0.65);
+    -moz-box-shadow: -4px 4px 5px 2px rgba(0,0,0,0.65);
+    box-shadow: -3px 3px 8px 0px rgba(0,0,0,0.65);
+    left: 10px;
+    top: -10px;
+}

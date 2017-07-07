@@ -21,9 +21,6 @@ export class HomeComponent implements OnInit {
     private menuService:MenuService, 
     private win:WindowService) {
 
-    Menu.File.Preferences(()=>{
-      win.openModalWindow("image", 1);
-    });
     Menu.File.SelectFolder(this.showFolderSelectDialog.bind(this));
   }
 

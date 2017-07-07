@@ -8,27 +8,24 @@ const BrowserWindow = Electron.BrowserWindow;
 @Injectable()
 export class WindowService {
   private mainWindow;
+  private md5;
 
   constructor() {
+    this.md5 = Electron.require('md5');
     this.mainWindow = Electron.getCurrentWindow();
   }
 
-  private generatePath(path: string, ...parameters) {
-    if (!path) return baseURL;
-    if (parameters && parameters.length > 0) path += "/" + parameters.join("/");
-    return baseURL + "#/" + path;
-  }
-
-  private generateWindow(config, path?, ...parameters) {
+  private generateWindow(config, path?) {
+    path = path ? baseURL + "#/" + path : baseURL;
     var win = new BrowserWindow(config);
-    win.loadURL(this.generatePath(path, parameters));
+    win.loadURL(path);
     return win;
   }
 
-  openModalWindow(route, ...parameters){
-    this.generateWindow(
-      {parent: this.mainWindow, modal: true, show: true},
-      route, parameters);
+  openModalWindow(route, title?){
+    var options:any = {parent: this.mainWindow, modal: true, show: true};
+    if(title) options.title = title;
+    this.generateWindow(options,route);
   }
 
    openFolderSelectionWindow(){

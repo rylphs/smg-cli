@@ -1,3 +1,6 @@
 <div *ngFor="let image of images" class="img-container">
-    <img height="150" src="{{image}}">
+    <img (dblclick)="openImageDetailWindow(image)"
+        (click)="selectImage(image)"
+        [class.selected]="isTheImageSelected(image)"
+        height="150" src="{{image}}">
 </div>

@@ -2,13 +2,6 @@ import { app, BrowserWindow, screen, Tray, Menu, dialog, ipcMain } from 'electro
 import * as path from 'path';
 import {Events} from './src/app/config/events';
 
-
-let appConfig = {
-  appPath:  app.getAppPath(),
-  concurrency: 2
-}
-
-
 let win, serve;
 
 const args = process.argv.slice(1);
@@ -20,9 +13,15 @@ if (serve) {
 }
 
 function createWindow() {
-  global['AppConfig'] = appConfig;
-
+  const baseURL = 'file://' + __dirname + '/index.html';
   const appIcon = new Tray(app.getAppPath() + '/assets/smg-cli.png')
+ 
+  global['AppConfig'] = {
+    appPath:  app.getAppPath(),
+    concurrency: 2
+  };
+
+  
 
   let electronScreen = screen;
   let size = electronScreen.getPrimaryDisplay().workAreaSize;
@@ -33,11 +32,13 @@ function createWindow() {
     y: 0,
     width: size.width,
     height: size.height,
+    webPreferences: {
+      webSecurity: false
+    },
     icon: app.getAppPath() + '/assets/smg-cli.png'
   });
 
-  // and load the index.html of the app.
-  win.loadURL('file://' + __dirname + '/index.html');
+  win.loadURL(baseURL);
 
   // Open the DevTools.
   if (serve) {

@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import {ImageListComponent} from './image-list/image-list.component';
 import {StatusComponent} from './status/status.component';
 import {FileSystemService} from './services/file-system.service';
+import {WindowService} from './services/window.service';
 import { StatusService } from './status/status.service';
 import { MenuService } from './services/menu.service';
 import { FolderTreeComponent } from './folder-tree/folder-tree.component';
@@ -19,6 +20,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import {TreeModule} from 'primeng/components/tree/tree';
 import {OverlayPanelModule} from 'primeng/components/overlaypanel/overlaypanel';
+import { ShowImageComponent } from './show-image/show-image.component';
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import {OverlayPanelModule} from 'primeng/components/overlaypanel/overlaypanel';
     HomeComponent,
     ImageListComponent,
     StatusComponent,
-    FolderTreeComponent
+    FolderTreeComponent,
+    ShowImageComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,10 @@ import {OverlayPanelModule} from 'primeng/components/overlaypanel/overlaypanel';
     TreeModule,
     OverlayPanelModule
   ],
-  providers: [FileSystemService, StatusService, MenuService],
+  providers: [
+    FileSystemService, StatusService, 
+    MenuService, WindowService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

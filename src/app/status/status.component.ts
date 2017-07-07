@@ -8,7 +8,6 @@ import {
   transition
 } from '@angular/animations';
 import {StatusService} from './status.service';
-import {MenuService, Menu} from '../services/menu.service';
 
 @Component({
   selector: 'status',
@@ -27,7 +26,7 @@ export class StatusComponent implements OnInit {
   private msg:string = "";
   display:boolean = false;
 
-  constructor(private status:StatusService, private dRef:ChangeDetectorRef, private menuService: MenuService) { 
+  constructor(private status:StatusService, private dRef:ChangeDetectorRef) { 
     status.addListener((status:{status:string, complete:boolean})=>{
       this.msg = status.status;
       this.display = ! status.complete;

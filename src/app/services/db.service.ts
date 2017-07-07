@@ -17,9 +17,9 @@ export class DBService {
     }
 
     getResourceEntry(path:string, location:string){
-        var id = 
-        this.db.get(location)
-            .find({ id: 1 })
-            .value()
+        var id = this.md5(path);
+        var value = this.db.get(location)
+            .find({ id: id })
+            .value();
     } 
 }

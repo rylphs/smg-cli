@@ -7,7 +7,7 @@ export interface ActionMenuItem{
     __config?:any;
 }
 
-export var Menu = {
+export var MainMenu = {
     File : {
         SelectFolder: <ActionMenuItem> {
             __config:{ accelerator: "CommandOrControl+o"}
@@ -22,13 +22,13 @@ export var Menu = {
 
 @Injectable()
 export class MenuService{
-    private menu:Electron.Menu;
+    private mainMenu:Electron.Menu;
 
     constructor(){
-        this.menu = new Electron.Menu();
-        var menus = this.generateMenuItem(Menu);
+        this.mainMenu = new Electron.Menu();
+        var menus = this.generateMenuItem(MainMenu);
         for(let i in menus){
-            this.menu.append(new Electron.MenuItem(menus[i]));
+            this.mainMenu.append(new Electron.MenuItem(menus[i]));
         }
     }
 
@@ -67,8 +67,8 @@ export class MenuService{
         return menus; 
     }
 
-    showMenu(){
-        Electron.Menu.setApplicationMenu(this.menu);
+    showMainMenu(){
+        Electron.Menu.setApplicationMenu(this.mainMenu);
     }
 
 }

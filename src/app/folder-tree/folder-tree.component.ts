@@ -47,12 +47,11 @@ export class FolderTreeComponent implements OnInit {
         return nodes;
     }
 
-    loadNode(event) { console.log(event.node);
+    loadNode(event) {
         if (event.node) {
             if (event.node.children && event.node.children.length > 0) return;
             event.node.children = this.createTreeNode(event.node.data);
             event.node.leaf = event.node.children.length == 0;
-            //setTimeout(()=> this.dRef.detectChanges());
         }
     }
 

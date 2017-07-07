@@ -1,12 +1,14 @@
-import { Component, OnInit, ChangeDetectorRef, EventEmitter, ViewChildren, QueryList} from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, 
+  EventEmitter, ViewChildren, QueryList} from '@angular/core';
 import {FileSystemService} from '../services/file-system.service'
-import {MenuService, Menu} from '../services/menu.service';
+import {WindowService} from '../services/window.service'
+import {MenuService, MainMenu as Menu} from '../services/menu.service';
 import {remote} from 'electron';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
   imagesDisplayed:string[] = [];
@@ -14,7 +16,14 @@ export class HomeComponent implements OnInit {
   selectedFolder:string;
   notifyme:EventEmitter<string> = new EventEmitter();
   
-  constructor(private fs: FileSystemService, private dRef:ChangeDetectorRef, private menuService:MenuService) {
+  constructor(private fs: FileSystemService, 
+    private dRef:ChangeDetectorRef, 
+    private menuService:MenuService, 
+    private win:WindowService) {
+
+    Menu.File.Preferences(()=>{
+      win.openModalWindow("image", 1);
+    });
     Menu.File.SelectFolder(this.showFolderSelectDialog.bind(this));
   }
 
@@ -24,11 +33,12 @@ export class HomeComponent implements OnInit {
   }
 
   private showFolderSelectDialog(){
-    remote.dialog.showOpenDialog({ properties: [ 'openDirectory']},
+    this.win.openFolderSelectionWindow().subscribe(this.onFolderSelected.bind(this));
+    /*remote.dialog.showOpenDialog({ properties: [ 'openDirectory']},
       (folders:string[]) =>{
         if(!folders || folders.length == 0) return;
         this.onFolderSelected.call(this, folders[0]);
-    });
+    });*/
   }
 
   showPhotos(folder:string){
@@ -43,7 +53,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.menuService.showMenu();
+    this.menuService.showMainMenu();
   }
 
 }

@@ -3,7 +3,6 @@ import { StatusService } from '../status/status.service';
 import { remote as Electron, ipcRenderer} from 'electron';
 import {AppConfig} from '../config/config';
 import {Messages} from '../config/messages';
-import {Events} from '../config/events';
 
 @Injectable()
 export class FileSystemService {
@@ -41,10 +40,6 @@ export class FileSystemService {
         this.path = Electron.require('path');
         this.sharp = Electron.require('sharp');
         this.async = Electron.require('async');
-
-        ipcRenderer.on(Events.FOLDER_SELECTED, (event:any, folder:string)=>{
-            this.onFolderChanged.emit(folder);
-        });
     }
 
     private isImage(file: string): boolean {

@@ -19,13 +19,14 @@ export class WindowService {
     path = path ? baseURL + "#/" + path : baseURL;
     var win = new BrowserWindow(config);
     win.loadURL(path);
+    win.webContents.openDevTools();
     return win;
   }
 
   openModalWindow(route, title?){
     var options:any = {parent: this.mainWindow, modal: true, show: true};
     if(title) options.title = title;
-    this.generateWindow(options,route);
+    return this.generateWindow(options,route);
   }
 
    openFolderSelectionWindow(){

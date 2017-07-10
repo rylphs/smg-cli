@@ -1,10 +1,10 @@
 <div id="content">
     <div class="centered">
-        <span id="prev">
+        <span id="prev" (click)="prev()">
             <i class="fa fa-chevron-left" aria-hidden="true"></i>
         </span>
-        <img src="{{path}}">
-        <span id="next">
+        <img src="{{viewedImage}}">
+        <span id="next" (click)="next()">
             <i class="fa fa-chevron-right" aria-hidden="true"></i>
         </span>
     </div>

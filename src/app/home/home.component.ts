@@ -20,7 +20,6 @@ export class HomeComponent implements OnInit {
     private dRef:ChangeDetectorRef, 
     private menuService:MenuService, 
     private win:WindowService) {
-
     Menu.File.SelectFolder(this.showFolderSelectDialog.bind(this));
   }
 
@@ -31,11 +30,6 @@ export class HomeComponent implements OnInit {
 
   private showFolderSelectDialog(){
     this.win.openFolderSelectionWindow().subscribe(this.onFolderSelected.bind(this));
-    /*remote.dialog.showOpenDialog({ properties: [ 'openDirectory']},
-      (folders:string[]) =>{
-        if(!folders || folders.length == 0) return;
-        this.onFolderSelected.call(this, folders[0]);
-    });*/
   }
 
   showPhotos(folder:string){

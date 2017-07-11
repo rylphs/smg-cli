@@ -1,5 +1,5 @@
-import { ElectronAngularApp, PathEntry } from "support/molecular/molecular-app";
-import { WindowConfig } from "support/molecular/window-manager";
+import { MolecularApp, PathEntry } from "app/support/molecular/molecular-app";
+import { WindowConfig } from "app/support/molecular/window-manager";
 
 var HomeComponent, ImageThumbComponent,
     ImageDetailComponent, Configure,
@@ -84,7 +84,7 @@ var config = {
 
 
 //main.ts
-var app = new ElectronAngularApp(config);
+var app = new MolecularApp(config);
 app.run();
 //end - main.ts
 

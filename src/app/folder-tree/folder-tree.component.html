@@ -1,4 +1,5 @@
 <p-overlayPanel></p-overlayPanel>
+<a routerLink="/pocwindow" >new window</a>
 <p-tree [(value)]="files" selectionMode="single"
     (onNodeSelect)="nodeSelect($event)"
     [(selection)]="selectedFile"  (onNodeExpand)="loadNode($event)"></p-tree>

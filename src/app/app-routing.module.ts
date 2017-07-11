@@ -2,6 +2,8 @@ import { HomeComponent } from './home/home.component';
 import {ShowImageComponent} from './show-image/show-image.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { WindowGuard } from "poc/window-guard";
+import { PocComponent } from "app/poc/poc.component";
 
 const routes: Routes = [
     {
@@ -11,6 +13,11 @@ const routes: Routes = [
     {
         path: 'image/:imageid',
         component: ShowImageComponent
+    },
+    {   
+        path: 'pocwindow',
+        component: PocComponent,
+        canActivate: [WindowGuard]
     }
 ];
 

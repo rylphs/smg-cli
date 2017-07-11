@@ -1,6 +1,6 @@
 import { app, BrowserWindow, screen, Tray, Menu, dialog, ipcMain } from 'electron';
 import * as path from 'path';
-import {Events} from './src/app/config/events';
+//import {Events} from './src/app/config/events';
 
 let win, serve;
 
@@ -21,7 +21,7 @@ function createWindow() {
     concurrency: 2
   };
 
-  
+  global['windows'] = {};
 
   let electronScreen = screen;
   let size = electronScreen.getPrimaryDisplay().workAreaSize;
@@ -44,6 +44,21 @@ function createWindow() {
   if (serve) {
     win.webContents.openDevTools();
   }
+
+  ipcMain.on("register-window", (event, data)=>{
+
+    let windows = global['windows'].win || {};
+    windows[data[0]] = data[1];
+    global['windows'].win = windows;
+    event.sender.send('window-registered', data[0]);
+  });
+
+   ipcMain.on("release-window", (event, id)=>{
+     let windows = global['windows'].win;
+     windows[id] = null;
+     delete windows[id];
+     global['windows'].win = windows;
+   });
 
   // Emitted when the window is closed.
   win.on('closed', () => {

@@ -20,6 +20,8 @@ import { AppRoutingModule } from './app-routing.module';
 import {TreeModule} from 'primeng/components/tree/tree';
 import {OverlayPanelModule} from 'primeng/components/overlaypanel/overlaypanel';
 import { ShowImageComponent } from './show-image/show-image.component';
+import { WindowGuard } from "poc/window-guard";
+import { PocComponent } from './poc/poc.component';
 
 
 @NgModule({
@@ -30,6 +32,7 @@ import { ShowImageComponent } from './show-image/show-image.component';
     StatusComponent,
     FolderTreeComponent,
     ShowImageComponent,
+    PocComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,7 @@ import { ShowImageComponent } from './show-image/show-image.component';
   ],
   providers: [
     FileSystemService, StatusService, 
-    MenuService, WindowService
+    MenuService, WindowService, WindowGuard
   ],
   bootstrap: [AppComponent]
 })

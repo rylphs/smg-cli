@@ -1,4 +1,5 @@
-import { ElectronAngularApp, WindowEntry, PathEntry } from "support/electron-angular-app";
+import { ElectronAngularApp, PathEntry } from "support/molecular/molecular-app";
+import { WindowConfig } from "support/molecular/window-manager";
 
 var HomeComponent, ImageThumbComponent,
     ImageDetailComponent, Configure,
@@ -20,7 +21,7 @@ export var Events = {//exporting to use outside
     }
 };
 
-export var Windows:WindowEntry = {//Set up all app windows. Can fire events? (e.g: close)
+export var Windows:WindowConfig = {//Set up all app windows. Can fire events? (e.g: close)
     main: {
         x: 0,
         y: 0,
@@ -77,7 +78,8 @@ var config = {
     windows: Windows,
     paths: Paths,
     menus: Menus,
-    global: {/*global constants*/ }
+    global: {//global constants 
+    }
 }
 
 
@@ -207,4 +209,4 @@ export class ImageDetailComponent2 {
     }
 }
 
-//
+//*/

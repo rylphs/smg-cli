@@ -1,36 +1,36 @@
-import {Injectable} from '@angular/core';
-import { remote as Electron} from 'electron';
-import {Subject} from 'rxjs/Subject';
-import {ElectronMenu} from '../util/electron-menu';
+import { Injectable } from '@angular/core';
+import { remote as Electron } from 'electron';
+import { Subject } from 'rxjs/Subject';
+import { ElectronMenu } from '../util/electron-menu';
 
-export interface ActionMenuItem{
-    (callback:()=>void):void;
-    __config?:any;
+export interface ActionMenuItem {
+    (callback: () => void): void;
+    __config?: any;
 }
 
-export var MainMenu = {
-    File : {
-        SelectFolder: <ActionMenuItem> {
-            __config:{ accelerator: "CommandOrControl+o"}
+export const MainMenu = {
+    File: {
+        SelectFolder: <ActionMenuItem>{
+            __config: { accelerator: 'CommandOrControl+o' }
         },
-        Preferences: <ActionMenuItem> {
-            __config:{ accelerator: "CommandOrControl+p"}
+        Preferences: <ActionMenuItem>{
+            __config: { accelerator: 'CommandOrControl+p' }
         }
     },
-    Help: {About: <ActionMenuItem> {} }
+    Help: { About: <ActionMenuItem>{} }
 };
 
 
 @Injectable()
-export class MenuService{
-    private mainMenu:Electron.Menu;
+export class MenuService {
+    private mainMenu: Electron.Menu;
 
-    constructor(){
-        var e = new ElectronMenu();
+    constructor() {
+        const e = new ElectronMenu();
         this.mainMenu = e.generateMenu(MainMenu);
     }
 
-    showMainMenu(){
+    showMainMenu() {
         Electron.Menu.setApplicationMenu(this.mainMenu);
     }
 

@@ -1,6 +1,6 @@
 import { remote as Electron } from 'electron';
 import { Injectable } from '@angular/core';
-import {Subject} from 'rxjs/Subject';
+import { Subject } from 'rxjs/Subject';
 
 const baseURL = 'file://' + __dirname + '/index.html';
 const BrowserWindow = Electron.BrowserWindow;
@@ -16,27 +16,27 @@ export class WindowService {
   }
 
   private generateWindow(config, path?) {
-    path = path ? baseURL + "#/" + path : baseURL;
-    var win = new BrowserWindow(config);
+    path = path ? baseURL + '#/' + path : baseURL;
+    const win = new BrowserWindow(config);
     win.loadURL(path);
     win.webContents.openDevTools();
     return win;
   }
 
-  openModalWindow(route, title?){
-    var options:any = {parent: this.mainWindow, modal: true, show: true};
-    if(title) options.title = title;
-    return this.generateWindow(options,route);
+  openModalWindow(route, title?) {
+    const options: any = { parent: this.mainWindow, modal: false, show: true };
+    if (title) options.title = title;
+    return this.generateWindow(options, route);
   }
 
-   openFolderSelectionWindow(){
-     var onFolderChosen = new Subject<string>();
-      Electron.dialog.showOpenDialog({ properties: [ 'openDirectory']},
-        (folders:string[]) =>{
-          if(!folders || folders.length == 0) return;
-          onFolderChosen.next(folders[0]);
+  openFolderSelectionWindow() {
+    const onFolderChosen = new Subject<string>();
+    Electron.dialog.showOpenDialog({ properties: ['openDirectory'] },
+      (folders: string[]) => {
+        if (!folders || folders.length === 0) return;
+        onFolderChosen.next(folders[0]);
       });
-      return onFolderChosen;
+    return onFolderChosen;
   }
 
 }

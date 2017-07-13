@@ -1,4 +1,4 @@
-import { MolecularApp, PathEntry } from "app/support/molecular/molecular-app";
+/*import { MolecularApp, PathEntry } from "app/support/molecular/molecular-app";
 import { WindowConfig } from "app/support/molecular/window-manager";
 
 var HomeComponent, ImageThumbComponent,

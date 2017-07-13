@@ -20,7 +20,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {TreeModule} from 'primeng/components/tree/tree';
 import {OverlayPanelModule} from 'primeng/components/overlaypanel/overlaypanel';
 import { ShowImageComponent } from './show-image/show-image.component';
-import { WindowGuard } from "poc/window-guard";
+import { WindowGuard } from 'poc/window-guard';
 import { PocComponent } from './poc/poc.component';
 
 
@@ -44,7 +44,7 @@ import { PocComponent } from './poc/poc.component';
     OverlayPanelModule
   ],
   providers: [
-    FileSystemService, StatusService, 
+    FileSystemService, StatusService,
     MenuService, WindowService, WindowGuard
   ],
   bootstrap: [AppComponent]

@@ -1,4 +1,7 @@
 <div id="main-container">
+      <input value="abrir Janela" type="button" (click)="abrirJanela()" />
+      <input value="mensagemA" type="button" (click)="enviarA()">
+      <input value="mensagemB" type="button" (click)="enviarB()">
     <div id="main-content">
       <div id="dir-nav">
         <folder-tree [folder]="currentFolder" (onSelect)="showPhotos($event)"></folder-tree>

@@ -1,6 +1,6 @@
 import { app, BrowserWindow, screen, Tray, Menu, dialog, ipcMain } from 'electron';
 import * as path from 'path';
-import { MolecularApp } from "./src/app/support/molecular/molecular-app";
+import {MolecularApp} from 'molecular';
 
 /*function createWindow() {
   global['windows'] = {};
@@ -23,8 +23,25 @@ import { MolecularApp } from "./src/app/support/molecular/molecular-app";
 
 }*/
 
-new MolecularApp({
-  windows:{
+const objects = [];
+
+ipcMain.on('rand', (...args) => {
+  objects.push({id: objects.length, value: Math.random()});
+});
+
+class Abcd {
+  a = 1;
+  b = 2;
+
+  teste() {
+    return objects;
+  }
+}
+
+exports.teste = new Abcd();
+
+const m = new MolecularApp({
+  windows: {
     main: {
       webPreferences: {
         webSecurity: false
@@ -36,4 +53,4 @@ new MolecularApp({
     appPath:  app.getAppPath(),
     concurrency: 2
   }
-}).run();
+});

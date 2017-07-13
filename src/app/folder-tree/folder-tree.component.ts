@@ -11,6 +11,7 @@ export class FolderTreeComponent implements OnInit {
   files:TreeNode[];
   selectedFile: TreeNode;
   _folder:string;
+  @Input() aaa:string;
   @Output() onSelect: EventEmitter<string> = new EventEmitter();
 
   constructor(private fs: FileSystemService,  private dRef:ChangeDetectorRef) {

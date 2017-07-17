@@ -23,22 +23,22 @@ import {MolecularApp} from 'molecular';
 
 }*/
 
-const objects = [];
+// const objects = [];
 
-ipcMain.on('rand', (...args) => {
-  objects.push({id: objects.length, value: Math.random()});
-});
+// ipcMain.on('rand', (...args) => {
+//   objects.push({id: objects.length, value: Math.random()});
+// });
 
-class Abcd {
-  a = 1;
-  b = 2;
+// class Abcd {
+//   a = 1;
+//   b = 2;
 
-  teste() {
-    return objects;
-  }
-}
+//   teste() {
+//     return objects;
+//   }
+// }
 
-exports.teste = new Abcd();
+// exports.teste = new Abcd();
 
 const m = new MolecularApp({
   windows: {

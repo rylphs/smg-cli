@@ -7,7 +7,7 @@ import { WindowService } from '../services/window.service'
 import { MenuService, MainMenu as Menu } from '../services/menu.service';
 import { remote, app, ipcRenderer } from 'electron';
 
-import { Fires, ListenTo } from 'molecular';
+import { Fires, ListenTo } from 'molecular/build/renderer';
 
 @Component({
   selector: 'app-home',
@@ -48,13 +48,13 @@ export class HomeComponent implements OnInit {
   }
 
   abrirJanela() {
-    ipcRenderer.send('rand', 'whatever');
+    ipcRenderer.send('criar', remote.getCurrentWindow().id);
   }
 
-  //@Fires('EventoA')
+  @Fires('EventoA')
   enviarA() {
-    console.log('remote:');
-    console.log(remote.require('./main').teste.teste());
+    console.log('remote:', remote.getCurrentWindow().id);
+    return 'eventoB';
   }
 
   @Fires('EventoB')

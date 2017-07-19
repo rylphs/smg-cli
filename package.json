@@ -91,6 +91,7 @@
     "postcss-url": "6.0.4",
     "protractor": "5.1.1",
     "raw-loader": "0.5.1",
+    "reflect-metadata": "^0.1.10",
     "sass-loader": "6.0.3",
     "script-loader": "0.7.0",
     "source-map-loader": "0.2.1",

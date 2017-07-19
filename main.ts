@@ -1,6 +1,7 @@
 import { app, BrowserWindow, screen, Tray, Menu, dialog, ipcMain } from 'electron';
 import * as path from 'path';
-import {MolecularApp} from 'molecular';
+import {MolecularApp} from 'molecular/build/main';
+import 'molecular/shared-chunk';
 
 /*function createWindow() {
   global['windows'] = {};
@@ -54,3 +55,13 @@ const m = new MolecularApp({
     concurrency: 2
   }
 });
+
+ipcMain.on('criar', (event, id)=>{
+  const baseURL = 'file://' + app.getAppPath() + '/index.html';
+  var w = BrowserWindow.fromId(id);
+  var nw = new BrowserWindow({
+    parent: w
+  });
+  nw.webContents.openDevTools();
+  nw.loadURL(baseURL + '#pocwindow');
+})

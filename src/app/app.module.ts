@@ -49,4 +49,4 @@ import { PocComponent } from './poc/poc.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModulet { }

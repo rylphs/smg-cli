@@ -1,11 +1,14 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Fires, ListenTo } from 'molecular';
+import { Fires, ListenTo, ConfigureBinding } from 'molecular/build/renderer';
+
+import {remote} from 'electron';
 
 @Component({
   selector: 'app-poc',
   templateUrl: './poc.component.html',
   styleUrls: ['./poc.component.scss']
 })
+@ConfigureBinding
 export class PocComponent implements OnInit {
   mensagem = 'nenhuma';
 
@@ -14,13 +17,14 @@ export class PocComponent implements OnInit {
   ngOnInit() {
   }
 
-  @ListenTo('EventoA')
+  @ListenTo('EventoA', {bound: false})
   testeRecebimento(mensagem: string) {
     this.mensagem = 'mensagem recebida: ' + mensagem;
-    console.log(this.mensagem);
-    setTimeout(100, () => {
+    console.log('client', mensagem);
+    /*this.cd.detectChanges();
+    setTimeout(0, () => {
       this.cd.detectChanges();
-    });
+    });*/
   }
 
 }

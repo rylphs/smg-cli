@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { TreeNode } from 'primeng/components/common/api';
 import { FileSystemService } from '../services/file-system.service';
+import { PocService } from "app/poc.service";
 
 @Component({
   selector: 'folder-tree',
@@ -8,14 +9,15 @@ import { FileSystemService } from '../services/file-system.service';
   styleUrls: ['./folder-tree.component.scss']
 })
 export class FolderTreeComponent implements OnInit {
+    rand:string;
   files:TreeNode[];
   selectedFile: TreeNode;
   _folder:string;
   @Input() aaa:string;
   @Output() onSelect: EventEmitter<string> = new EventEmitter();
 
-  constructor(private fs: FileSystemService,  private dRef:ChangeDetectorRef) {
- 
+  constructor(private fs: FileSystemService,  private dRef:ChangeDetectorRef, private poc: PocService) {
+    this.rand = poc.random.toString();
   }
 
   @Input() set folder(folder:string){

@@ -12,7 +12,7 @@ const { CommonsChunkPlugin, UglifyJsPlugin } = require('webpack').optimize;
 const { AotPlugin } = require('@ngtools/webpack');
 
 const nodeModules = path.join(process.cwd(), 'node_modules');
-const entryPoints = ["inline", "polyfills", "sw-register", "styles", "vendor", "main"];
+const entryPoints = ["inline", "polyfills", "sw-register", "styles", "vendor", "molecular", "main"];
 const baseHref = "";
 const deployUrl = "";
 
@@ -80,13 +80,31 @@ function getPlugins() {
     "minChunks": null
   }));
 
-  plugins.push(new CommonsChunkPlugin({
-    "name": "vendor",
-    "minChunks": (module) => module.resource && module.resource.startsWith(nodeModules),
+   plugins.push(new CommonsChunkPlugin({
+    "name": "molecular",
+    "minChunks": (module) => {
+  
+      if(module.resource && module.resource.startsWith(nodeModules) && /node_modules\/molecular/.test(module.resource.toString())){
+        console.log(module.resource);
+      }
+      return module.resource && module.resource.startsWith(nodeModules) && /node_modules\/molecular/.test(module.resource)
+    },
     "chunks": [
-      "main"
+      "main", 
     ]
   }));
+
+  plugins.push(new CommonsChunkPlugin({
+    "name": "vendor",
+    "minChunks": (module) => {
+      return module.resource && module.resource.startsWith(nodeModules) && !/node_modules\/molecular/.test(module.resource)
+    },
+    "chunks": [
+      "main", "molecular"
+    ]
+  }));
+
+  
 
   plugins.push(new ExtractTextPlugin({
     "filename": "[name].bundle.css",
@@ -145,7 +163,8 @@ function getPlugins() {
         "environments/index.ts": "environments/index.prod.ts"
       },
       "exclude": [],
-      "tsConfigPath": "src/tsconfig.app.json"
+      "tsConfigPath": "src/tsconfig.app.json",
+       "skipCodeGeneration": true
     }));
 
     plugins.push(new UglifyJsPlugin({

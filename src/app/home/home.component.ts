@@ -1,6 +1,6 @@
 import {
   Component, OnInit, ChangeDetectorRef,
-  EventEmitter, ViewChildren, QueryList
+  EventEmitter, ViewChildren, QueryList, ReflectiveKey
 } from '@angular/core';
 import { FileSystemService } from '../services/file-system.service'
 import { WindowService } from '../services/window.service'
@@ -8,6 +8,7 @@ import { MenuService, MainMenu as Menu } from '../services/menu.service';
 import { remote, app, ipcRenderer } from 'electron';
 
 import { Fires, ListenTo } from 'molecular/build/renderer';
+import { PocService, PocService2 } from "app/poc.service";
 
 @Component({
   selector: 'app-home',
@@ -15,15 +16,18 @@ import { Fires, ListenTo } from 'molecular/build/renderer';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  rand: string;
   imagesDisplayed: string[] = [];
   currentFolder = '/home/07125220690/Documentos';
   selectedFolder: string;
   notifyme: EventEmitter<string> = new EventEmitter();
 
-  constructor(private fs: FileSystemService,
+  constructor(private fs: FileSystemService, private poc: PocService,
     private dRef: ChangeDetectorRef,
     private menuService: MenuService,
     private win: WindowService) {
+      this.rand = poc.random.toString();
+      console.log(poc);
     Menu.File.SelectFolder(this.showFolderSelectDialog.bind(this));
   }
 
@@ -63,6 +67,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(ReflectiveKey.get(PocService).displayName);
     this.menuService.showMainMenu();
   }
 

@@ -1,3 +1,4 @@
+import {WindowService} from '../services/window.service';
 import { Injectable, EventEmitter } from '@angular/core';
 
 type StatusMessage = {status:string, complete:boolean}
@@ -5,6 +6,8 @@ type StatusMessage = {status:string, complete:boolean}
 @Injectable()
 export class StatusService {
   private status:StatusMessage = {status:'idle', complete:true};
+
+  constructor(private a:WindowService){}
  
   private statusChangeListener:EventEmitter<StatusMessage> = new EventEmitter();
 

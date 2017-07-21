@@ -28,6 +28,8 @@ export class HomeComponent implements OnInit {
     private win: WindowService) {
       this.rand = poc.random.toString();
       console.log(poc);
+      poc.teste();
+      poc.random = 936543;
     Menu.File.SelectFolder(this.showFolderSelectDialog.bind(this));
   }
 

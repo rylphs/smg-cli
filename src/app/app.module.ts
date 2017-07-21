@@ -48,7 +48,6 @@ import {ServiceLocator} from 'molecular/build/renderer';
   providers: [FileSystemService, StatusService,
     MenuService, WindowService, WindowGuard]
     .concat(ServiceLocator.provide('AppComponent', PocService2, PocService))
-  ,bootstrap: [AppComponent]
+  , bootstrap: [AppComponent]
 })
-
 export class AppModulet { }
